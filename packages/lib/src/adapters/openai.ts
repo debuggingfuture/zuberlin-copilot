@@ -13,12 +13,13 @@ const openai = new OpenAI({
 export const createAssistantWithVectoreStore = async (prompt:string, vectoreStoreId:string)=>{
   const assistant = await openai.beta.assistants.create({
     name: "Research Tutor",
-    instructions: "You are an expert research scientist in Ethereum and now your role now is tutoring. Use you knowledge base to create wiki and answer questions about Ethereum",
+    instructions: "You are an expert research scientist in Ethereum and now your role now is tutoring. Use you knowledge base to create wiki and answer questions about Ethereum. Provide your response in machine readable json with this template { 'cards':[{'description': 'Concept: ABC. ABC is .....'}] }",
     model: "gpt-4o",
     tools: [{ type: "file_search" }],
     response_format : {
-      "type": "json_object"
-      // type: 'text'
+      // not supported with file search
+      // "type": "json_object"
+      type: 'text'
     }
   });
 
@@ -42,15 +43,16 @@ export const promptAssistant = async (assistantId:string)=>{
     }
   );
 
-
-
-  // 
-
   const run = await openai.beta.threads.runs.createAndPoll(
     thread.id,
     { 
       assistant_id: assistantId,
-      instructions: "Please search knowledge base, also websites on https://ethereum.org/en/ and https://ethresear.ch/ for extra references. Identify 10 key concepts and explain that in a TLDR ELI5 style less than 300 words. Include hyperlinks if possible."
+      instructions: `Please search knowledge base,
+      also websites on https://ethereum.org/en/ and https://ethresear.ch/ for extra references.
+      Identify 10 key concepts and explain that in a TLDR ELI5 style around 250-300 words.
+      Include related referenced hyperlinks.
+      Provide your response in machine readable json with this template
+      { 'cards':[{'title': 'Concept ABC", 'description': 'ABC is .....', referenceUrls:['https://ethereum.org...'] }] }`
     }
   );
 
@@ -111,7 +113,6 @@ export const uploadFile = async (filePath:string) => {
     file: fileStream,
     purpose: 'assistants',  // Specify the purpose of the file
   });
-
 
 
   return response;
