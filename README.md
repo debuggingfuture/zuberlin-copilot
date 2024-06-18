@@ -9,6 +9,9 @@ https://docs.google.com/presentation/d/1ZOaCexq8eQ3l6XHah_lIOFiErPRZdwhk5U1x7tH9
 
 This is to experiment how we can foster cross-polluniation with simple mechanism. Inspired by Community Notes at Twitter, we aim to provide context and aid for learning domain expertise, meanwhile encourage participation and explore audience the interest and knowledge level community with the help of AI 
 
+## Start app
+- setup .env from env.example
+- env-cmd pnpm --filter web run dev
 
 ## Mantle Contract
 
