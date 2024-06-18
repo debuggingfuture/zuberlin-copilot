@@ -36,3 +36,9 @@ yarn-error.log*
 # Misc
 .DS_Store
 *.pem
+
+
+apps/contracts_voting/node_modules/*
+apps/contracts_voting/cache/*
+apps/contracts_voting/out/*
+apps/contracts_voting/.github

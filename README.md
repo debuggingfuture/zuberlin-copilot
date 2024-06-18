@@ -14,5 +14,5 @@ This is to experiment how we can foster cross-polluniation with simple mechanism
 
 - Deployed on sepolia at below address
   - https://explorer.sepolia.mantle.xyz/address/0x9d4D7Db2Ad457B6fC31C5F2B4BD5B741E02b3A99
-- `cd apps/contracts`
+- `cd apps/contracts_voting`
 - `env-cmd -f ../../.env forge script script/Deploy.s.sol  --rpc-url https://rpc.sepolia.mantle.xyz  --gas-price 1000 --gas-limit 60000000000000000 --broadcast --legacy`
